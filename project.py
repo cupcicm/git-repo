@@ -1687,7 +1687,7 @@ class Project(object):
           _error("%s: Not replacing %s hook", self.relpath, name)
           continue
       try:
-        crossPlatformSymlink(relpath(stock_hook, dst), dst)
+        crossPlatformSymlink(stock_hook, dst)
       except OSError, e:
         if e.errno == errno.EPERM:
           raise GitError('filesystem must support symlinks')
