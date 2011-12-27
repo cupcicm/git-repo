@@ -49,7 +49,6 @@ _urllib_lock = _threading.Lock()
 
 def _lwrite(path, content):
   lock = '%s.lock' % path
-
   fd = open(lock, 'wb')
   try:
     fd.write(content)
@@ -57,6 +56,10 @@ def _lwrite(path, content):
     fd.close()
 
   try:
+    try:
+      os.remove(path)
+    except:
+      pass
     os.rename(lock, path)
   except OSError:
     os.remove(lock)
@@ -93,6 +96,7 @@ def _ProjectHooks():
   return _project_hook_list
 
 def relpath(dst, src):
+  src = os.path.dirname(src)
   if hasattr(os.path, 'relpath'):
     return os.path.relpath(dst, src)
   if sys.platform.startswith('win32'):
@@ -100,7 +104,7 @@ def relpath(dst, src):
                               "trying to use repo on Windows. You need to re-"
                               "implement relpath in a way that works on"
                               "windows.")
-  src = os.path.dirname(src)
+
   top = os.path.commonprefix([dst, src])
   if top.endswith('/'):
     top = top[:-1]
