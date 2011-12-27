@@ -22,6 +22,7 @@ import xml.dom.minidom
 from git_config import GitConfig, IsId
 from project import RemoteSpec, Project, MetaProject, R_HEADS, HEAD
 from error import ManifestParseError
+from compat import crossPlatformSymlink
 
 MANIFEST_FILE_NAME = 'manifest.xml'
 LOCAL_MANIFEST_NAME = 'local_manifest.xml'
@@ -104,7 +105,7 @@ class XmlManifest(object):
     try:
       if os.path.exists(self.manifestFile):
         os.remove(self.manifestFile)
-      os.symlink('manifests/%s' % name, self.manifestFile)
+      crossPlatformSymlink('manifests/%s' % name, self._manifestFile)
     except OSError, e:
       raise ManifestParseError('cannot link manifest %s' % name)
 

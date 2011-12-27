@@ -35,6 +35,7 @@ except ImportError:
   SEEK_END = 2
 
 from color import Coloring
+from compat import crossPlatformSymlink
 from git_command import GitCommand
 from git_config import GitConfig, IsId, GetSchemeFromUrl, ID_RE
 from error import DownloadError
@@ -1679,7 +1680,7 @@ class Project(object):
           _error("%s: Not replacing %s hook", self.relpath, name)
           continue
       try:
-        os.symlink(relpath(stock_hook, dst), dst)
+        crossPlatformSymlink(relpath(stock_hook, dst), dst)
       except OSError, e:
         if e.errno == errno.EPERM:
           raise GitError('filesystem must support symlinks')
@@ -1740,7 +1741,7 @@ class Project(object):
           src = os.path.join(self.gitdir, name)
           dst = os.path.join(dotgit, name)
           if os.path.islink(dst) or not os.path.exists(dst):
-            os.symlink(relpath(src, dst), dst)
+            crossPlatformSymlink(src, dst)
           else:
             raise GitError('cannot overwrite a local work tree')
         except OSError, e:
