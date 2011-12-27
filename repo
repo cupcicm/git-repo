@@ -592,7 +592,11 @@ def main(orig_args):
   me.extend(orig_args)
   me.extend(extra_args)
   try:
-    os.execv(main, me)
+    # Use subprocess with shell=True so that the unix-like
+    # environment is preserved. That means we'll have two
+    # processes running and not just one, but it's not a big 
+    # problem for now.
+    subprocess.call(me, shell=True)
   except OSError, e:
     print >>sys.stderr, "fatal: unable to start %s" % main
     print >>sys.stderr, "fatal: %s" % e
