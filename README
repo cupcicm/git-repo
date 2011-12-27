@@ -1,0 +1,13 @@
+This is a fork of the android repo tool, that has three major differences 
+with the official sources :
+* It should work on Windows. The most basic operations work, but I couldn't
+check them all. It works only on later versions of Windows (Vista and later).
+You need to run with administrative privileges because that's the only way you 
+can create symlinks on windows.
+* All symlinks are absolute (while they are relative in the official repo). That
+means you will probably find it really hard to move a repo with this version.
+* This tool still depends on a linux-like environment, with a shell, etc. : You 
+will need to use either cygwin or git-bash.
+
+This is definitely not a very polished version, for which I unfortunately don't
+have time now. I am definitely interested in pull requests if you fix or clean things.
