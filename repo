@@ -2,7 +2,7 @@
 
 ## repo default configuration
 ##
-REPO_URL='https://code.google.com/p/git-repo/'
+REPO_URL='git@github.com:cupcicm/git-repo.git'
 REPO_REV='stable'
 
 # Copyright (C) 2008 Google Inc.
