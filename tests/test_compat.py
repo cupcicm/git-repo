@@ -15,8 +15,11 @@ class WindowsLinkerTest(unittest.TestCase):
     shutil.rmtree(self._sDir)
 
   def testCreatesLinks(self):
-    with open(os.path.join(self._sDir, 'a'), 'w') as afile:
+    afile = open(os.path.join(self._sDir, 'a'), 'w')
+    try:
       afile.write('a')
+    finally:
+      afile.close()
 
     crossPlatformSymlink(os.path.join(self._sDir, 'a'),
                          os.path.join(self._sDir, 'b'))
