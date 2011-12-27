@@ -93,6 +93,13 @@ def _ProjectHooks():
   return _project_hook_list
 
 def relpath(dst, src):
+  if hasattr(os.path, 'relpath'):
+    return os.path.relpath(dst, src)
+  if sys.platform.startswith('win32'):
+    raise NotImplementedError("You have a low version of python (< 2.6) and "
+                              "trying to use repo on Windows. You need to re-"
+                              "implement relpath in a way that works on"
+                              "windows.")
   src = os.path.dirname(src)
   top = os.path.commonprefix([dst, src])
   if top.endswith('/'):
