@@ -210,8 +210,10 @@ class GitCommand(object):
                            env = env,
                            stdin = stdin,
                            stdout = stdout,
-                           stderr = stderr)
+                           stderr = stderr,
+                           shell=True)
     except Exception, e:
+      print e
       raise GitError('%s: %s' % (command[1], e))
 
     if ssh_proxy:
