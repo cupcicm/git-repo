@@ -682,7 +682,7 @@ class Project(object):
       return all[rev]
 
     try:
-      return self.bare_git.rev_parse('--verify', '%s^0' % rev)
+      return self.bare_git.rev_parse('--verify', '%s' % rev)
     except GitError:
       raise ManifestInvalidRevisionError(
         'revision %s in %s not found' % (self.revisionExpr,
