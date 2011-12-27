@@ -28,6 +28,7 @@ from error import GitError, ImportError, UploadError
 from error import ManifestInvalidRevisionError
 
 from git_refs import GitRefs, HEAD, R_HEADS, R_TAGS, R_PUB
+from compat import crossPlatformSymlink
 
 def _lwrite(path, content):
   lock = '%s.lock' % path
@@ -1211,7 +1212,7 @@ class Project(object):
           _error("%s: Not replacing %s hook", self.relpath, name)
           continue
       try:
-        os.symlink(relpath(stock_hook, dst), dst)
+        crossPlatformSymlink(relpath(stock_hook, dst), dst)
       except OSError, e:
         if e.errno == errno.EPERM:
           raise GitError('filesystem must support symlinks')
@@ -1270,7 +1271,7 @@ class Project(object):
         if relink:
           os.remove(dst)
         if os.path.islink(dst) or not os.path.exists(dst):
-          os.symlink(relpath(src, dst), dst)
+          crossPlatformSymlink(relpath(src, dst), dst)
         else:
           raise GitError('cannot overwrite a local work tree')
       except OSError, e:

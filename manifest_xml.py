@@ -26,6 +26,7 @@ from project import MetaProject
 from project import R_HEADS
 from project import HEAD
 from error import ManifestParseError
+from compat import crossPlatformSymlink
 
 MANIFEST_FILE_NAME = 'manifest.xml'
 LOCAL_MANIFEST_NAME = 'local_manifest.xml'
@@ -89,7 +90,7 @@ class XmlManifest(Manifest):
     try:
       if os.path.exists(self._manifestFile):
         os.remove(self._manifestFile)
-      os.symlink('manifests/%s' % name, self._manifestFile)
+      crossPlatformSymlink('manifests/%s' % name, self._manifestFile)
     except OSError, e:
       raise ManifestParseError('cannot link manifest %s' % name)
 
