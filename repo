@@ -592,11 +592,12 @@ def main(orig_args):
   me.extend(orig_args)
   me.extend(extra_args)
   try:
-    # Use subprocess with shell=True so that the unix-like
+    # On Windows, use subprocess with shell=True so that the unix-like
     # environment is preserved. That means we'll have two
-    # processes running and not just one, but it's not a big 
-    # problem for now.
-    subprocess.call(me, shell=True)
+    # processes running and not just one, but it's not a big
+    # problem for now. On Linux, don't use shell=True because it breaks repo.
+    use_shell=sys.platform.startswith('win32')
+    subprocess.call(me, shell=use_shell)
   except OSError, e:
     print >>sys.stderr, "fatal: unable to start %s" % main
     print >>sys.stderr, "fatal: %s" % e

@@ -28,6 +28,10 @@ GIT_DIR = 'GIT_DIR'
 LAST_GITDIR = None
 LAST_CWD = None
 
+# On Windows, we should use shell=True.
+# On Linux, we should use shell=False (not sure why.)
+SHOULD_USE_SHELL = sys.platform.startswith('win32')
+
 _ssh_proxy_path = None
 _ssh_sock_path = None
 _ssh_clients = []
@@ -208,9 +212,8 @@ class GitCommand(object):
                            stdin = stdin,
                            stdout = stdout,
                            stderr = stderr,
-                           shell=True)
+			   shell=SHOULD_USE_SHELL)
     except Exception, e:
-      print e
       raise GitError('%s: %s' % (command[1], e))
 
     if ssh_proxy:
