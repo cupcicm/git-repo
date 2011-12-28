@@ -2,7 +2,7 @@
 
 ## repo default configuration
 REPO_URL='ssh://git.corp.ltutech.com:29418/repo'
-REPO_REV='master'
+REPO_REV='stable'
 
 # Copyright (C) 2008 Google Inc.
 #
