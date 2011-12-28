@@ -135,7 +135,7 @@ group.add_option('--repo-branch',
                  dest='repo_branch',
                  help='repo branch or revision', metavar='REVISION')
 group.add_option('--repo-verify',
-                 dest='no_repo_verify', action='store_false', default=true,
+                 dest='no_repo_verify', action='store_false', default=True,
                  help='do not verify repo source code')
 
 # Other
