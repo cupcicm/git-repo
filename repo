@@ -1,8 +1,7 @@
 #!/bin/sh
 
 ## repo default configuration
-##
-REPO_URL='git@github.com:cupcicm/git-repo.git'
+REPO_URL='ssh://git.corp.ltutech.com:29418/repo'
 REPO_REV='stable'
 
 # Copyright (C) 2008 Google Inc.
@@ -594,7 +593,7 @@ def main(orig_args):
   try:
     # Use subprocess with shell=True so that the unix-like
     # environment is preserved. That means we'll have two
-    # processes running and not just one, but it's not a big 
+    # processes running and not just one, but it's not a big
     # problem for now.
     subprocess.call(me, shell=True)
   except OSError, e:
