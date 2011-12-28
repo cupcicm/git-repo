@@ -134,8 +134,8 @@ group.add_option('--repo-url',
 group.add_option('--repo-branch',
                  dest='repo_branch',
                  help='repo branch or revision', metavar='REVISION')
-group.add_option('--no-repo-verify',
-                 dest='no_repo_verify', action='store_true',
+group.add_option('--repo-verify',
+                 dest='no_repo_verify', action='store_false', default=true,
                  help='do not verify repo source code')
 
 # Other
